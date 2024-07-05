@@ -31,6 +31,7 @@ function cadastrarAluno() {
         console.log('Aluno já cadastrado!');
         return;
     }
+    // Cria um novo aluno e adiciona ao array de alunos
     let aluno = new Aluno(nome);
     alunos.push(aluno);
     console.log('Aluno cadastrado com sucesso!');
@@ -49,7 +50,7 @@ function cadastrarMaterias() {
     } while (!aluno);
 
     // Deve cadastrar no mínimo 3 matérias
-    for (let i = aluno.materias.length; i <= 3; i++) {
+    for (let i = aluno.materias.length; i < 3; i++) {
         cadastrarMateria(aluno);
     }
     // Cadastro de matérias adicionais
@@ -57,22 +58,28 @@ function cadastrarMaterias() {
 }
 
 function cadastrarMateria(aluno) {
-
-    let nome = prompt('Digite o nome da matéria: ');
-    // verifica se a materia já foi cadastrada
-    if (!aluno.materias.find(m => m.nome === nome)) {
-
-        let nota1 = validarNota('Digite a nota 1: ');
-        let nota2 = validarNota('Digite a nota 2: ');
-        let nota3 = validarNota('Digite a nota 3: ');
-        let faltas = validarFalta('Digite a quantidade de faltas: ');
     
-        let materia = new Materia(nome, nota1, nota2, nota3, faltas);
-        aluno.materias.push(materia); 
-    }
-    else {
-        console.log('Matéria já cadastrada!');
-    }
+    let materiaExistente = false;
+    // Loop repete até que uma matéria não existente seja cadastrada
+    do {
+        let nome = prompt('Digite o nome da matéria: ');
+        // verifica se a materia já foi cadastrada
+        if (!aluno.materias.find(m => m.nome === nome)) {
+    
+            let nota1 = validarNota('Digite a nota 1: ');
+            let nota2 = validarNota('Digite a nota 2: ');
+            let nota3 = validarNota('Digite a nota 3: ');
+            let faltas = validarFalta('Digite a quantidade de faltas: ');
+        
+            let materia = new Materia(nome, nota1, nota2, nota3, faltas);
+            aluno.materias.push(materia); 
+            materiaExistente = false;
+        }
+        else {
+            console.log('Matéria já cadastrada!');
+            materiaExistente = true;
+        }
+    } while (materiaExistente);
 }
 
 function consultarAluno() {  
@@ -82,12 +89,13 @@ function consultarAluno() {
         console.log('Aluno não encontrado!');
     } else {
         console.log('Aluno: ' + aluno.nome);
-        console.log('Matérias: ');
+        console.log('Matérias: \n');
         aluno.materias.forEach(m => {
             console.log('Matéria: ' + m.nome);
             console.log('Média: ' + m.media.toFixed(2));
             console.log('Faltas: ' + m.faltas);
             console.log('Reprovado: ' + m.reprovado);
+            console.log('\n');
         });
     }
 }  

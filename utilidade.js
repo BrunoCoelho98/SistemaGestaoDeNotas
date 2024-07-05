@@ -1,5 +1,7 @@
 const prompt = require('prompt-sync')();
 
+
+// Recebe a nota do aluno e valida se é um número entre 0 e 10
 function validarNota(promptText) {
     let valido = false;
     let numero;
@@ -19,6 +21,7 @@ function validarNota(promptText) {
     return numero;
 }
 
+// Recebe o número de faltas do aluno e valida se é um número inteiro positivo
 function validarFalta(promptText) {
     let valido = false;
     let numero;
