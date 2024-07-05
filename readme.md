@@ -31,7 +31,7 @@ Permite consultar informações sobre um aluno específico, incluindo as matéri
     ```
 2. Navegue até o diretório do projeto:
     ```sh
-    cd seu-repositorio
+    cd SistemaGestaoDeNotas
     ```
 3. Instale as dependências:
     ```sh
